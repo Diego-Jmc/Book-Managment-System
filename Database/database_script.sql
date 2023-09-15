@@ -74,3 +74,32 @@ CREATE TABLE reviews (
         FOREIGN KEY (fk_book)
         REFERENCES books(id)
 );
+
+--inserts
+
+
+INSERT INTO genders (description) VALUES
+    ('Fiction'),
+    ('Mystery'),
+    ('Science Fiction'),
+    ('Romance'),
+    ('Fantasy'),
+    ('Horror'),
+    ('Thriller'),
+    ('Non-fiction'),
+    ('Biography'),
+    ('Self-help'),
+    ('Historical Fiction'),
+    ('Adventure');
+
+
+-- Roles
+
+INSERT INTO roles (description)
+VALUES ('admin');
+
+INSERT INTO roles (description)
+VALUES ('user');
+
+
+
