@@ -2,7 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
 
 // Modelo para la tabla 'roles'
-class Role extends Model {
+export class Role extends Model {
   public id!: number;
   public description!: string;
 }
