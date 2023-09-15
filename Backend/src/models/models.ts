@@ -30,7 +30,7 @@ export function initRole(sequelize: Sequelize): void {
 }
 
 // Modelo para la tabla 'users'
-class User extends Model {
+export class User extends Model {
   public id!: number;
   public name!: string;
   public lastname!: string;
@@ -85,7 +85,7 @@ export function initUser(sequelize: Sequelize): void {
 }
 
 // Modelo para la tabla 'genders'
-class Gender extends Model {
+export class Gender extends Model {
   public id!: number;
   public description!: string;
 }
@@ -113,7 +113,7 @@ export function initGender(sequelize: Sequelize): void {
 }
 
 // Modelo para la tabla 'editorials'
-class Editorial extends Model {
+export class Editorial extends Model {
   public id!: number;
   public name!: string;
   public location!: string;
@@ -145,7 +145,7 @@ export function initEditorial(sequelize: Sequelize): void {
 }
 
 // Modelo para la tabla 'books'
-class Book extends Model {
+export class Book extends Model {
   public id!: number;
   public isbn!: string;
   public name!: string;
@@ -203,7 +203,7 @@ export function initBook(sequelize: Sequelize): void {
 }
 
 // Modelo para la tabla 'book_loans'
-class BookLoan extends Model {
+export class BookLoan extends Model {
   public id!: number;
   public fk_book_id!: number;
   public fk_user_id!: number;
@@ -242,7 +242,7 @@ export function initBookLoan(sequelize: Sequelize): void {
 }
 
 // Modelo para la tabla 'reviews'
-class Review extends Model {
+export class Review extends Model {
   public id!: number;
   public fk_user!: number;
   public fk_book!: number;
