@@ -6,6 +6,20 @@ export interface IDbConnection{
 
 }
 
+export interface ApiError{
+    debug_msg:string,
+    status:number,
+    date:Date,
+}
+
+export interface UserResult{
+     id: number;
+     name: string;
+     lastname: string;
+     email: string;
+     role_id: number;
+}
+
 export interface UserLogin{
     email:string,
     password:string
@@ -19,9 +33,11 @@ export interface IRoleRepository {
 export interface IUserRepository{
 
     findById(id: number): Promise<User | null>
+    findByEmail(email:string):Promise<User | null>
     findAll(): Promise<User[]>
     deleteById(id:number):Promise<boolean>
     create(user:User):Promise<void>
     update(user:User):Promise<boolean>
+
 
 }

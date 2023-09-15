@@ -33,12 +33,19 @@ export class RoleAbstractRepository implements IRoleRepository{
 
 
 export class UserAbstractRepository implements IUserRepository{
+
+    async findByEmail(email: string): Promise<User | null> {
+        const users = await User.findAll()
+        const user = users.find((user) => user.email === email)
+        return user || null
+    }
     
    async findById(id: number): Promise<User | null> {
         
         try{
              const user = await User.findByPk(id)
              return user?.get({plain:true})
+             
         }catch(err){
             throw new Error(`Error trying to find user ${err}`)
         }    
