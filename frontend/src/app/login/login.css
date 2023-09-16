@@ -1,0 +1,29 @@
+body{
+    background-color: #F7F6F2;
+}
+
+.login-form-container{
+    
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+
+}
+
+.registration-form{
+    width: 40%;
+}
+
+.registration{
+    margin-top: 2rem;
+    width: 100%;
+    text-align: center;
+}
+
+.submit-login-btn{
+    margin-top: 1rem;
+    width: 100%;
+}
