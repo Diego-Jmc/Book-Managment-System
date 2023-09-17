@@ -2,8 +2,8 @@
 "use client"
 import { imageDb } from "./config"
 import { ChangeEvent, useState } from 'react'
-import axios from 'axios'
-
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
+const { v4 } = require('uuid');
 
 export default function Administrator() {
 
@@ -16,14 +16,32 @@ export default function Administrator() {
     }
 
 
-    function handleSubmit(){
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>)=>{
+       
+        event.preventDefault()
+        
+       if(img != undefined){
+        const imageUrl =  ref(imageDb,`books/${v4()}`)
+   
+        uploadBytes(imageUrl,img).then(res=>{
+
+            getDownloadURL(res.ref).then(url=>{
+                console.log("The url is:"+url)
+            })
+            
+        })
+
+
+       }
+
     }
+    
 
     return (
 
         <div className="container administrator-page-container">
 
-            <form>
+            <form onSubmit={handleSubmit}>
 
                 <div>
                     <label htmlFor="formFileLg" className="form-label">Large file input example</label>
