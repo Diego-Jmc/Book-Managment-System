@@ -3,18 +3,12 @@ body{
 }
 
 .login-form-container{
-    
+  
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    
-
-}
-
-.registration-form{
-    width: 40%;
 }
 
 .registration{

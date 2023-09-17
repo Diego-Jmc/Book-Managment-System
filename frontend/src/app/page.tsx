@@ -1,6 +1,5 @@
 
 import 'bootstrap/dist/css/bootstrap.css'
-import { userLogin } from '@/interfaces/interfaces'
 
 export default function Home() {
   return (

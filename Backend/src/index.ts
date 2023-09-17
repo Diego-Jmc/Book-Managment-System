@@ -15,7 +15,7 @@ const cors = require('cors')
 // API and PORT configuration
 
 const api_version = process.env.API_VERSION
-const PORT = process.env.PORT  || 3001
+const PORT = process.env.PORT  || 3001 
 
 
 // database connection init (necessary to use ORM)
