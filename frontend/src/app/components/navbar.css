@@ -1,0 +1,5 @@
+.nav-bar-ul-div{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1rem;
+}

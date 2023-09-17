@@ -37,10 +37,6 @@ export default function Login() {
         axios.post(`http://localhost:3001/login`,userLogin)
         .then(res=>{
 
-            console.log(res.data)
-
-           
-
         }).catch(err=>{
                        
                 setShowLoginError(true)
@@ -91,7 +87,7 @@ export default function Login() {
                     showLoginError?  
                     
                     
-                    <div className="alert alert-danger" role="alert">
+                    <div className="alert alert-danger invalid-user-alert" role="alert">
 
                     Invalid user or password
 

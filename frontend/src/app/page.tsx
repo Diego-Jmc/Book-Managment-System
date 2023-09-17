@@ -1,8 +1,13 @@
 
-import 'bootstrap/dist/css/bootstrap.css'
+
+import '../app/main.css'
+
 
 export default function Home() {
   return (
-      <h1>Main page</h1>
+      
+      <div className='main-page-container container-fluid'>
+      
+      </div>
   )
 }
