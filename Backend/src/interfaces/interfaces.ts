@@ -1,4 +1,4 @@
-import { Role , User } from "../models/models"
+import { Book, Editorial, Gender, Role , User } from "../models/models"
 
 
 export interface IDbConnection{
@@ -40,4 +40,23 @@ export interface IUserRepository{
     update(user:User):Promise<boolean>
 
 
+}
+
+export interface  IEditorialRepository{
+    findAll():Promise<Editorial[]>
+    findById(id:number):Promise<Editorial|null>
+    create(gender:Editorial):Promise<void>
+}
+
+export interface IGenderRepository{
+    findAll():Promise<Gender[]>
+    findById(id:number):Promise<Gender|null>
+    create(gender:Gender):Promise<void>
+
+}
+
+export interface IBookRepository{
+    findAll():Promise<Book[]>
+    findById(id:number):Promise<Book|null>
+    create(gender:Book):Promise<void>
 }

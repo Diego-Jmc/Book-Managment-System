@@ -1,17 +1,20 @@
 
 import { User } from "../models/models"
 import { UserAbstractRepository } from "../repositories/repositories"
-import { UserLogin, UserResult } from "../interfaces/interfaces"
+import { IUserRepository, UserLogin, UserResult } from "../interfaces/interfaces"
 const bcrypt = require('bcrypt')
 
 
 
-export class UserServices{
+export default class UserServices{
 
-     repo:UserAbstractRepository = new UserAbstractRepository()
+     readonly repo:IUserRepository = new UserAbstractRepository()
      salt = 10 
          
-
+     constructor(){
+    
+     }
+    
 
      async checkUser(email:string):Promise<boolean>{
         const users = await this.findAll()  

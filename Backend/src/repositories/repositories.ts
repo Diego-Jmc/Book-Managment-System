@@ -1,5 +1,5 @@
-import { IRoleRepository ,IUserRepository } from "../interfaces/interfaces";
-import { Role, User } from "../models/models";
+import { IBookRepository, IEditorialRepository, IGenderRepository, IRoleRepository ,IUserRepository } from "../interfaces/interfaces";
+import { Book, Editorial, Gender, Role, User } from "../models/models";
 
 export class RoleAbstractRepository implements IRoleRepository{
 
@@ -92,15 +92,122 @@ export class UserAbstractRepository implements IUserRepository{
 
  
         } catch (err) {
-            console.error(`Error al crear el usuario: ${err}`);
+            console.error(`Error al crear el usuario: ${err}`)
             
-            throw err; 
+            throw err
         }
     }
 
 
     update(user: User): Promise<boolean> {
+        throw new Error("Method not implemented.")
+    }
+    
+}
+
+export class GenderAbstractRepository implements IGenderRepository{
+
+    async findAll(): Promise<Gender[]> {
+       const genders = await Gender.findAll()
+        return genders.map(gender=> gender.get({plain:true}))
+    }
+
+    async findById(id: number): Promise<Gender | null> {
+        
+        try{
+            const gender = await Gender.findByPk(id)
+        
+            if(gender){
+                return gender?.get({plain:true}) 
+            }
+            return null
+
+        }catch(err){
+            throw new Error("Err trying to find gender")
+        }
+
+           
+    }
+
+    async create(gender: Gender): Promise<void> {
+        try{
+
+            await Gender.create({
+                description:gender.description
+               })
+
+        }catch(err){
+            throw new Error("Error trying to create gender")
+        }
+
+    }
+
+}
+
+export class EditorialAbstractRepository implements IEditorialRepository{
+
+    async findAll(): Promise<Editorial[]> {
+
+        const foundEditorials = await Editorial.findAll()
+        return foundEditorials.map(editorial => editorial.get({plain:true}))
+
+    }
+    
+    async findById(id: number): Promise<Editorial | null> {
+        try{
+
+            const editorial = await this.findById(id)
+            
+            if(editorial){
+                return editorial
+            }
+
+            return null
+
+        }catch(err){
+            throw new Error("Err trying to find editorial")
+
+        }
+    }
+
+    async create(gender: Editorial): Promise<void> {
         throw new Error("Method not implemented.");
     }
     
+}
+
+export class BookAbstractRepository implements IBookRepository{
+
+    async findAll(): Promise<Book[]> {
+
+        const books = await Book.findAll()
+        return books.map(book=> book.get({plain:true}))
+
+    }
+    findById(id: number): Promise<Book | null> {
+        throw new Error("Method not implemented.");
+    }
+
+    async create(book: Book): Promise<void> {
+
+       try{
+
+        await Book.create({
+         isbn: book.isbn,
+         name: book.name,
+         sinopsis: book.sinopsis,
+         fk_gender_id: book.fk_gender_id,
+         image_url: book.image_url,
+         stock: book.stock,
+         fk_editorial_id: book.fk_editorial_id,
+         release_date: book.release_date,
+        })
+
+       }catch(err){
+        throw new Error("Error trying to create book");
+
+       }
+
+    }
+
 }

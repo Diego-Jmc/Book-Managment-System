@@ -1,11 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
 
-module.exports ={ 
-    
+module.exports = {
     env: {
-       server_url : 'http://localhost:3001',
+      server_url: 'http://localhost:3001',
     },
-    nextConfig 
-
-}
+    // Other Next.js configuration options can be added here as needed
+};
+  

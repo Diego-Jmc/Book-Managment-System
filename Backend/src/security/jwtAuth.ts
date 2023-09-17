@@ -1,6 +1,7 @@
 import { Request,Response } from "express"
 import { UserLogin } from "../interfaces/interfaces"
-import { UserServices } from "../services/userServices"
+import UserServices from "../services/userServices"
+
 const dotenv = require('dotenv')
 const jwt = require('jsonwebtoken')
 const express = require('express')

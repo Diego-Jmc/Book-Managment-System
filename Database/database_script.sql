@@ -77,6 +77,7 @@ CREATE TABLE reviews (
 
 --inserts
 
+--genders
 
 INSERT INTO genders (description) VALUES
     ('Fiction'),
@@ -102,4 +103,18 @@ INSERT INTO roles (description)
 VALUES ('user');
 
 
+
+-- editorials 
+
+INSERT INTO editorials (name, location) VALUES
+    ('Libros del Norte', 'Nueva York'),
+    ('Editorial del Bosque', 'Los Ángeles'),
+    ('Ediciones Estrella', 'Chicago'),
+    ('Libros del Sur', 'Miami'),
+    ('Editorial de la Luna', 'San Francisco'),
+    ('Ediciones del Mar', 'Seattle'),
+    ('Editorial de la Montaña', 'Denver'),
+    ('Libros del Este', 'Boston'),
+    ('Ediciones del Sol', 'Houston'),
+    ('Editorial del Oeste', 'San Diego');
 

@@ -4,8 +4,6 @@ const api_router = require('./routes/Router')
 const dotenv = require('dotenv')
 const auth = require('./security/jwtAuth')
 
-
-
 dotenv.config();
 
 const express = require('express')
@@ -26,8 +24,6 @@ const db = new PostgreDbConnection()
 // middleware configuration
 app.use(cors())
 app.use(express.json())
-
-
 
 // server routing configuration
 
