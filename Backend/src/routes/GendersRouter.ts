@@ -26,7 +26,7 @@ gendersRouter.get('/genders',async (req:Request,res:Response)=>{
         genderFound !=null ? res.status(200).json(genderFound) : res.status(204)
 
     }catch(err){
-        res.status(400).send()
+        res.status(400).send('No books found')
     }
 
 })

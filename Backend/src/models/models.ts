@@ -139,7 +139,7 @@ export function initEditorial(sequelize: Sequelize): void {
       sequelize,
       modelName: 'Editorial',
       tableName: 'editorials',
-      timestamps: false, // Deshabilita timestamps
+      timestamps: false, 
     }
   );
 }

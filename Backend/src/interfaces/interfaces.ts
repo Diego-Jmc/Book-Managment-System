@@ -59,4 +59,5 @@ export interface IBookRepository{
     findAll():Promise<Book[]>
     findById(id:number):Promise<Book|null>
     create(gender:Book):Promise<void>
+    deleteByID(id:number):Promise<boolean>
 }

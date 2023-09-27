@@ -149,14 +149,14 @@ export class EditorialAbstractRepository implements IEditorialRepository{
     async findAll(): Promise<Editorial[]> {
 
         const foundEditorials = await Editorial.findAll()
-        return foundEditorials.map(editorial => editorial.get({plain:true}))
+        return foundEditorials.map(editorial => editorial)
 
     }
     
     async findById(id: number): Promise<Editorial | null> {
         try{
 
-            const editorial = await this.findById(id)
+            const editorial = await Editorial.findByPk(id)
             
             if(editorial){
                 return editorial
@@ -178,14 +178,30 @@ export class EditorialAbstractRepository implements IEditorialRepository{
 
 export class BookAbstractRepository implements IBookRepository{
 
+    async deleteByID(id: number): Promise<boolean> {
+
+      try{
+        const deletedCount = await Book.destroy({
+            where:{id}
+        })
+
+        return deletedCount > 0
+      }catch(err){
+        throw new Error(`Delete book failed: ${err}`)
+      }
+
+    }
+
     async findAll(): Promise<Book[]> {
 
         const books = await Book.findAll()
         return books.map(book=> book.get({plain:true}))
 
     }
-    findById(id: number): Promise<Book | null> {
-        throw new Error("Method not implemented.");
+    
+   async findById(id: number): Promise<Book | null> {
+        const foundBook = await Book.findByPk(id)
+        return foundBook
     }
 
     async create(book: Book): Promise<void> {
@@ -204,7 +220,7 @@ export class BookAbstractRepository implements IBookRepository{
         })
 
        }catch(err){
-        throw new Error("Error trying to create book");
+        throw new Error(`${err}`);
 
        }
 
