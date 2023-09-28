@@ -16,7 +16,8 @@ bookRouter.get('/books',async (req:Request,res:Response)=>{
     try{
 
         const book = await service.findById(parseInt(req.params.id))
-        res.json(book).send()
+        res.json(book)
+        return
     }catch(err){
         res.status(204).send()
     }
@@ -30,6 +31,7 @@ bookRouter.get('/books',async (req:Request,res:Response)=>{
         const bookToCreate = req.body
         await service.create(bookToCreate)
         res.status(200).send('Book created')
+        return
 
     }catch(err){
         res.status(204).send()
@@ -41,7 +43,8 @@ bookRouter.get('/books',async (req:Request,res:Response)=>{
     
     try{
         const deleted = await service.removeById(parseInt(req.params.id))
-        deleted? res.status(200).send('deleted') : res.status(201).send()
+        deleted? res.status(200).send('deleted') : res.status(201)
+        return
     }catch(err){
       console.log(err)
         res.status(204).send()

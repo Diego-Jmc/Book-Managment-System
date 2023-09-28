@@ -1,0 +1,17 @@
+.add-books-form{
+    width: 60%;
+}
+
+textarea{
+    resize: none;
+}
+
+.form-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.administrator-page-container{
+    margin-top: 2rem;
+}
