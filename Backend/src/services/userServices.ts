@@ -14,6 +14,10 @@ export default class UserServices{
      constructor(){
     
      }
+
+     async findById(id:number):Promise<User | null>{
+        return await this.repo.findById(id)
+     }
     
 
      async checkUser(email:string):Promise<boolean>{

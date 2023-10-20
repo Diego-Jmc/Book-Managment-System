@@ -4,7 +4,7 @@ const api_router = require('./routes/Router')
 const dotenv = require('dotenv')
 const auth = require('./security/jwtAuth')
 
-dotenv.config();
+dotenv.config()
 
 const express = require('express')
 const app = express()

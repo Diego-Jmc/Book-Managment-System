@@ -7,9 +7,10 @@ const bookRouter = express.Router()
 
 const service = new BookServices()
 
-bookRouter.get('/books',async (req:Request,res:Response)=>{
+bookRouter.get('/books', async (req:Request,res:Response)=>{
     const books = await service.findAll()
-    res.json(books).send()
+    res.json(books)
+    return 
 })
 .get('/books/:id',async (req:Request,res:Response)=>{
 

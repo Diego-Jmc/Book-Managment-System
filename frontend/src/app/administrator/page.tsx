@@ -2,7 +2,7 @@
 "use client"
 import './admin.css'
 import { imageDb } from "./config"
-import { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { Book, Editorial, Gender } from '@/interfaces/interfaces'
 import axios from 'axios'
@@ -19,7 +19,21 @@ export default function Administrator() {
         class: 'alert alert-danger'
     })
 
-
+    
+    function resetForm() {
+        setBookBody({
+          isbn: "",
+          name: "",
+          sinopsis: "",
+          fk_gender_id: 1,
+          image_url: "none",
+          stock: 1,
+          fk_editorial_id: 0,
+          release_date: new Date()
+        });
+      
+        setImg(null); 
+      }
 
     const [img, setImg] = useState<File | null>()
     const [showNotification, setShowNotification] = useState<boolean>(false)
@@ -113,6 +127,7 @@ export default function Administrator() {
                     const newBookBody = { ...bookBody }
                     newBookBody.image_url = url
                     submitBook(newBookBody)
+                    resetForm();
                 })
 
             })
