@@ -7,23 +7,49 @@ import { useEffect, useState } from "react"
 import '../components/bookcard.css'
 import '../books/books.css'
 import BookCard from "../components/BookCard"
+import { useRouter } from 'next/navigation'
 
+import Cookies from 'js-cookie';
 
 export default function Books(){
+    const router = useRouter()
+
 
     const [books,setBooks] = useState<Book[]>([])
 
-    async function fechtBooks():Promise<Book[]>{
-        const response = await axios.get(`${process.env.server_url}/v1/books`)
-        return response.data
-    } 
 
+    function isUserAuth():boolean{
+
+        const token = Cookies.get('bms-token')
+        const id = Cookies.get('bms-user-id')
+        return token != undefined && id != undefined
+
+    }
+
+    async function fetchBooks(): Promise<Book[]> {
+        const token = Cookies.get('bms-token')
+
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        };
+      
+        const response = await axios.get(`${process.env.server_url}/v1/books`, config)
+        return response.data
+      }
+      
     useEffect(()=>{
-    
-       fechtBooks().then(data=>{
-        console.log(data)
-        setBooks(data)
-       })
+       
+        if(isUserAuth()){
+            fetchBooks().then(data=>{
+                console.log(data)
+                setBooks(data)
+            })
+        }else{
+            router.push('/login')
+        }
+
 
     },[])
 

@@ -2,14 +2,15 @@
 
 import 'bootstrap/dist/css/bootstrap.css'
 import './login.css'
-import React, { ChangeEvent, useState } from 'react';
-import { UserLogin } from '@/interfaces/interfaces';
-import axios from 'axios';
-
-
-
+import React, { ChangeEvent, useState } from 'react'
+import { UserLogin } from '@/interfaces/interfaces'
+import axios from 'axios'
+import Cookies from 'js-cookie'
+import { useRouter } from 'next/navigation'
 
 export default function Login() {
+
+    const router = useRouter()
 
     let [userLogin, setUserLogin] = useState<UserLogin>({
         email: "",
@@ -21,9 +22,9 @@ export default function Login() {
 
 
     const handleInputChange = ( event: ChangeEvent<HTMLInputElement>): void => {
-        const { name, value } = event.target;
+        const { name, value } = event.target
         
-        const updateUserState: UserLogin = { ...userLogin, [name]: value };
+        const updateUserState: UserLogin = { ...userLogin, [name]: value }
  
         setUserLogin(updateUserState)
      };
@@ -32,15 +33,20 @@ export default function Login() {
      const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         
- 
 
-        axios.post(`http://localhost:3002/login`,userLogin)
+
+        axios.post(`${process.env.server_url}login`,userLogin)
         .then(res=>{
 
-        }).catch(err=>{
-                       
-                setShowLoginError(true)
-            
+                const token:string = res.data.token
+                Cookies.remove('bms-token')
+                Cookies.set('bms-token', token ) 
+                Cookies.set('bms-user-id',res.data.user.id)
+                router.push('/user')
+
+        }).catch(err=>{                 
+                console.log(err)   
+                setShowLoginError(true) 
         })
 
 

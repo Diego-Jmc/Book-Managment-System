@@ -24,3 +24,15 @@ export interface Book  {
     name:string,
     location:string
   }
+
+  export interface User {
+    id: number,
+    name: string,
+    lastname: string,
+    email: string,
+    password: string,
+    role_id: number,
+    created_at: string,
+    createdAt: string
+  }
+  

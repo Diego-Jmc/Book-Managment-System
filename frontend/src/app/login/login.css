@@ -19,13 +19,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
 
+
+.registration-form{
+   width: 100%;
+   max-width: 800px;
 }
 
 .registration{
     margin-top: 2rem;
     width: 100%;
     text-align: center;
+ 
 }
 
 .submit-login-btn{

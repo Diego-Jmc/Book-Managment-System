@@ -5,6 +5,7 @@ const rolRouter = require('./RolesRouter')
 const genderRouter = require('./GendersRouter')
 const editorialRouter = require('./EditorialRouter')
 const booksRouter = require('./BooksRouter')
+const usersRouter = require('./UsersRouter')
 import jwtFilter from '../security/jwtFilter'
 
 const router = express.Router()
@@ -31,6 +32,7 @@ router.use(async (req:Request, res:Response, next:NextFunction) => {
 
 })
 
+router.use(usersRouter)
 router.use(rolRouter)
 router.use(genderRouter)
 router.use(editorialRouter)

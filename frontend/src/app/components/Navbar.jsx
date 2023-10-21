@@ -24,7 +24,7 @@ export default function Navbar() {
             </li>
       
             <li className="nav-item">
-              <a className="nav-link" href="#">Profile</a>
+              <a className="nav-link" href="/user">Profile</a>
             </li>
       
             <li className="nav-item">

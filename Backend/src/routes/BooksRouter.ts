@@ -17,7 +17,9 @@ bookRouter.get('/books', async (req:Request,res:Response)=>{
     try{
 
         const book = await service.findById(parseInt(req.params.id))
-        res.json(book)
+        
+        book != null? res.json(book) : res.status(204).send()
+        
         return
     }catch(err){
         res.status(204).send()
