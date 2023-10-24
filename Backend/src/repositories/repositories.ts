@@ -1,5 +1,5 @@
-import { IBookRepository, IEditorialRepository, IGenderRepository, IRoleRepository ,IUserRepository } from "../interfaces/interfaces";
-import { Book, Editorial, Gender, Role, User } from "../models/models";
+import { IBookRepository, IEditorialRepository, IGenderRepository, IReviewRepository, IRoleRepository ,IUserRepository } from "../interfaces/interfaces";
+import { Book, Editorial, Gender, Review, Role, User } from "../models/models";
 
 export class RoleAbstractRepository implements IRoleRepository{
 
@@ -177,8 +177,50 @@ export class EditorialAbstractRepository implements IEditorialRepository{
 }
 
 
-export class ReviewAbstractRepository{
-    
+export class ReviewAbstractRepository implements IReviewRepository{
+
+    async findAll(): Promise<Review[]> {
+
+    const reviews = await Review.findAll()
+    return reviews
+    }
+
+
+    async findById(id: number): Promise<Review | null> {
+
+        try{
+            const review = await Review.findByPk(id)
+            return review? review : null
+
+        }catch(err){
+            throw new Error("Err trying to find review")
+
+        }
+
+    }
+    async create(review: Review): Promise<void> {
+
+        try{
+
+            await  Review.create({
+                fk_user:review.fk_user,
+                fk_book:review.fk_book,
+                commentary:review.commentary,
+                stars:review.stars
+            })
+
+        }catch(err){
+            throw new Error("Err trying to create review")
+
+        }
+
+
+    }
+    deleteByID(id: number): Promise<boolean> {
+        throw new Error("Not implemented")
+
+    }
+
 }
 
 export class BookAbstractRepository implements IBookRepository{

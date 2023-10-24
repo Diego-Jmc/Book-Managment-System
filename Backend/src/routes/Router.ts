@@ -6,6 +6,8 @@ const genderRouter = require('./GendersRouter')
 const editorialRouter = require('./EditorialRouter')
 const booksRouter = require('./BooksRouter')
 const usersRouter = require('./UsersRouter')
+const reviresRouter = require('./ReviewsRouter')
+
 import jwtFilter from '../security/jwtFilter'
 
 const router = express.Router()
@@ -37,7 +39,7 @@ router.use(rolRouter)
 router.use(genderRouter)
 router.use(editorialRouter)
 router.use(booksRouter)
-
+router.use(reviresRouter)
 
 module.exports = router
 
