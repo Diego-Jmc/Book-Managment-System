@@ -22,4 +22,8 @@ export default class ReviewServices{
 
     }
 
+    async createReview(review:Review){
+        await this.repo.create(review)
+    }
+
 }

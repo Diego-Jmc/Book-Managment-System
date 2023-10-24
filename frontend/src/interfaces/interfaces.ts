@@ -37,3 +37,11 @@ export interface Book  {
     createdAt: string
   }
   
+  export interface Review  {
+    id: number ,
+    fk_user: number,
+    fk_book: number,
+    commentary: string,
+    stars: number,
+    date:Date
+  }

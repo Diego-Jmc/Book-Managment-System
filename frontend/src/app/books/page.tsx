@@ -61,7 +61,7 @@ export default function Books(){
                <div className="book-cards-container">
 
                {
-                books.map(book=> <BookCard  {...book}/>)
+                books.map((book,key)=> <BookCard key={key}  {...book}/>)
             }
 
                 </div> 

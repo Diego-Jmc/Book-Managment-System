@@ -15,6 +15,7 @@ export default class PostgreDbConnection implements IDbConnection{
 
 
   constructor(){
+  
     this.connect()
     this.syncDatabaseObjects()
     initUser(this.sequelize);

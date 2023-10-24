@@ -1,7 +1,7 @@
 "use client"
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
-import { Book} from '@/interfaces/interfaces';
+import { Book, Review} from '@/interfaces/interfaces';
 import axios from 'axios';
 import { useRouter } from 'next/navigation'
 import './book.css'
@@ -17,7 +17,20 @@ export default function Book({params}:pageProps){
     const [book,setBook] = useState<Book>()
     const [editorial,setEditorial] = useState<String>("")
     const [gender,setGender] = useState<String>("")
+    const [bookComments,setBookComments] = useState<Review[]>()
 
+
+    function fetchReviewsByBookId(id:number){
+        const token = Cookies.get('bms-token')
+        const axiosConfig = {
+            headers: {
+                Authorization: `Bearer ${token}` 
+            }
+        }
+
+        
+        return axios.get(`${process.env.server_url}/v1/reviews/book/${id}`,axiosConfig)
+    }    
 
     function isUserAuth():boolean{
 
@@ -72,7 +85,7 @@ export default function Book({params}:pageProps){
 
                      fetchEditorial(res.data.fk_editorial_id).then(res=> setEditorial(res.data.name))
                      fetchGender(res.data.fk_gender_id).then(res=> setGender(res.data.description))  
-
+                     fetchReviewsByBookId(res.data.id).then(res=> setBookComments(res.data))   
                 })
                 .catch(err => {
                     console.log(err);
@@ -97,7 +110,10 @@ export default function Book({params}:pageProps){
                     </div>
                 </div>
 
-                <CommentBox></CommentBox>
+                {
+             bookComments != undefined ? <CommentBox reviews={bookComments} /> : null
+                }
+
 
         </div>
     )

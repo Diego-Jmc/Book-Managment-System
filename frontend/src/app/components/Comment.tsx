@@ -1,24 +1,29 @@
+import { Review } from '@/interfaces/interfaces'
 import './commentBox.css'
+import { useEffect, useState } from 'react';
 
-export default function Comment(){
+interface CommentBoxProps {
+    review: Review;
+}
+
+export default function Comment(props: CommentBoxProps) {
+    const { review } = props
+    const [date,setDate] = useState<String>("")
+
     return (
         <div className="comment">
             <div className='user-comment-info'>
-                <p>Raul Gonzales</p>
-                <p>2/2/2023</p>
+                <p>{review.fk_user}</p>
+                <p>{review.date}</p>
             </div>
 
             <div>
-                <p>"La prosa exquisita del autor te transporta a un mundo de maravilla y asombro. Cada página es una invitación a explorar los rincones más profundos de la condición humana, y te sumerge en una travesía emocional que es imposible de olvidar. 
-                    Este libro es un viaje inolvidable que te dejará reflexionando mucho
-                     después de haberlo terminado."</p>
-            </div>
-            
-            <div>
-                <p>Rating:5</p>
+                <p>{review.commentary}</p>
             </div>
 
+            <div>
+                <p>Rating: {review.stars}</p>
+            </div>
         </div>
-
     )
 }

@@ -35,6 +35,15 @@ router.get('/reviews', async (req:Request,res:Response)=>{
     }
 
     return
+}).post('/reviews',async (req:Request,res:Response)=>{
+    try{
+        await services.createReview(req.body)
+        res.sendStatus(200)
+        return
+    }catch(err){
+        res.sendStatus(400)
+        return
+    }
 })
 
 module.exports = router

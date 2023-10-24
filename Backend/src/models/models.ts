@@ -248,6 +248,7 @@ export class Review extends Model {
   public fk_book!: number;
   public commentary!: string;
   public stars!: number;
+  public date!: Date; 
 }
 
 export function initReview(sequelize: Sequelize): void {
@@ -269,6 +270,9 @@ export function initReview(sequelize: Sequelize): void {
       },
       stars: {
         type: DataTypes.INTEGER,
+      },
+      date: {
+        type: DataTypes.DATE, 
       },
     },
     {
