@@ -1,4 +1,5 @@
 import { Book } from '@/interfaces/interfaces';
+import Link from 'next/link';
 import React from 'react';
 
 
@@ -10,9 +11,9 @@ export default function BookCard(book:Book) {
       <div className="card-body">
         <h5 className="card-title">{book.name}</h5>
         <p className="card-text">Stock:{book.stock}</p>
-        <a href="#" className="btn btn-primary">
-          information
-        </a>
+       <button className="btn btn-dark">
+       <Link className="nav-link" href={`/book/${book.id}`}>Information</Link>
+       </button>
       </div>
     </div>
   );

@@ -17,7 +17,6 @@ editorialRouter.get('/editorials',async (req:Request,res:Response)=>{
 .get('/editorials/:id',async (req:Request,res:Response)=>{
     try{
         const found = await service.findById(parseInt(req.params.id))
-        console.log(found)
         found != null ? res.status(200).json(found) : res.status(204).send()
     }catch(err){
         res.status(401).send()

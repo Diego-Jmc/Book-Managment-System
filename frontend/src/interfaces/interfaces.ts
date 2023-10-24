@@ -4,14 +4,15 @@ export interface UserLogin{
 }
 
 export interface Book  {
-     isbn: string;
-     name: string;
-     sinopsis: string;
-     fk_gender_id: number;
-     image_url: string;
-     stock: number;
-     fk_editorial_id: number;
-     release_date: Date;
+     id:number,
+     isbn: string,
+     name: string,
+     sinopsis: string,
+     fk_gender_id: number,
+     image_url: string,
+     stock: number,
+     fk_editorial_id: number,
+     release_date: Date,
   }
 
   export interface Gender{

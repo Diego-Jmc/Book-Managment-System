@@ -7,21 +7,31 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { Book, Editorial, Gender } from '@/interfaces/interfaces'
 import axios from 'axios'
 const { v4 } = require('uuid');
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation'
 
 const CLASS_SUCESS = 'alert alert-success'
 const CLASS_FAIL = 'alert alert-danger'
 
 
 export default function Administrator() {
-
+    const router = useRouter()
     const [notificationMessage, setNotificationMessage] = useState({
         message: '',
         class: 'alert alert-danger'
     })
 
-    
+    function isUserAuth():boolean{
+
+        const token = Cookies.get('bms-token')
+        const id = Cookies.get('bms-user-id')
+        return token != undefined && id != undefined
+
+    }
+
     function resetForm() {
         setBookBody({
+            id:0,
           isbn: "",
           name: "",
           sinopsis: "",
@@ -40,7 +50,7 @@ export default function Administrator() {
     const [genders, setGenders] = useState<Gender[]>([])
     const [editorials, setEditorials] = useState<Editorial[]>([])
     const [bookBody, setBookBody] = useState<Book>({
-
+        id:0,
         isbn: "",
         name: "",
         sinopsis: "",
@@ -65,17 +75,20 @@ export default function Administrator() {
         }, 3000);
     }
 
-    function submitBook(book:Book) {
-
-        axios.post(`${process.env.server_url}/v1/books`,book)
-        .then(data=>{
-            showNotificationMessage('Book added',CLASS_SUCESS)
+    function submitBook(book: Book) {
+        const token = Cookies.get('bms-token');
+    
+        axios.post(`${process.env.server_url}/v1/books`, book, {
+            headers: {
+                Authorization: `Bearer ${token}` 
+            }
         })
-        .catch(err=>{
-            showNotificationMessage(err,CLASS_FAIL)
+        .then(data => {
+            showNotificationMessage('Book added', CLASS_SUCESS)
         })
-
-        
+        .catch(err => {
+            showNotificationMessage(err, CLASS_FAIL)
+        });
     }
 
     function handleChangeImage(e: ChangeEvent<HTMLInputElement>) {
@@ -86,7 +99,7 @@ export default function Administrator() {
 
     function handleAddBookFormChange(event: ChangeEvent<HTMLInputElement>) {
 
-        const { name, value } = event.target;
+        const { name, value } = event.target
 
         setBookBody((prevBookBody) => ({
             ...prevBookBody,
@@ -137,35 +150,55 @@ export default function Administrator() {
 
 
     async function fetchGenders(): Promise<Gender[]> {
+
+
         try {
-            const response = await axios.get(`${process.env.server_url}/v1/genders`);
+                        
+            const token = Cookies.get('bms-token')
+            const response = await axios.get(`${process.env.server_url}/v1/genders`, {
+                headers: {
+                    Authorization: `Bearer ${token}` // Agregar el token al encabezado
+                }
+            });
             return response.data;
         } catch (error) {
             return [];
         }
     }
-
+    
     async function fetchEditorials(): Promise<Editorial[]> {
         try {
-            const response = await axios.get(`${process.env.server_url}/v1/editorials`)
-            return response.data
+            const token = Cookies.get('bms-token')
+            const response = await axios.get(`${process.env.server_url}/v1/editorials`, {
+                headers: {
+                    Authorization: `Bearer ${token}` // Agregar el token al encabezado
+                }
+            });
+            return response.data;
         } catch {
-            return []
+            return [];
         }
-    }
 
+    }
 
     useEffect(() => {
 
-        fetchGenders().then(genders => {
+        if(isUserAuth()){
 
-            setGenders(genders)
-        })
 
-        fetchEditorials().then(editorials => {
-            console.log(editorials)
-            setEditorials(editorials)
-        })
+            fetchGenders().then(genders => {
+
+                setGenders(genders)
+            })
+    
+            fetchEditorials().then(editorials => {
+                console.log(editorials)
+                setEditorials(editorials)
+            })
+    
+        }else{
+            router.push('/login')
+        }
 
     }, [])
 

@@ -35,7 +35,7 @@ export default function Login() {
         
 
 
-        axios.post(`${process.env.server_url}login`,userLogin)
+        axios.post(`${process.env.server_url}/login`,userLogin)
         .then(res=>{
 
                 const token:string = res.data.token

@@ -1,4 +1,4 @@
-import { Book, Editorial, Gender, Role , User } from "../models/models"
+import { Book, Editorial, Gender, Review, Role , User } from "../models/models"
 
 
 export interface IDbConnection{
@@ -59,5 +59,12 @@ export interface IBookRepository{
     findAll():Promise<Book[]>
     findById(id:number):Promise<Book|null>
     create(gender:Book):Promise<void>
+    deleteByID(id:number):Promise<boolean>
+}
+
+export interface IReviewRepository{
+    findAll():Promise<Review[]>
+    findById(id:number):Promise<Review|null>
+    create(review:Review):Promise<void>
     deleteByID(id:number):Promise<boolean>
 }

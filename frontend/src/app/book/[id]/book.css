@@ -1,0 +1,19 @@
+.book-info-container{
+    display: flex;
+    margin-top: 2rem;
+    height: 600px;
+}
+
+
+
+.info-box{
+    padding: 2rem;
+}
+
+.img-container{
+    height: 100%;
+}
+
+.img-container img{
+    height: 100%;
+}

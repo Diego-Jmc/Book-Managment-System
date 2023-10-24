@@ -1,0 +1,30 @@
+.comment-box-container{
+    margin-top: 1rem;
+}
+
+.comment{
+    width: 100%;
+    border: 2px solid black;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 14px;
+}
+
+.user-comment-info{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
+.make-comment-box{
+    width: 100%;
+    padding: 1rem;
+    
+}
+
+.make-comment-ta{
+    width: 100%;
+    resize: none;
+    margin-bottom: 1rem;
+}

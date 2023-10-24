@@ -176,6 +176,11 @@ export class EditorialAbstractRepository implements IEditorialRepository{
     
 }
 
+
+export class ReviewAbstractRepository{
+    
+}
+
 export class BookAbstractRepository implements IBookRepository{
 
     async deleteByID(id: number): Promise<boolean> {
@@ -227,3 +232,4 @@ export class BookAbstractRepository implements IBookRepository{
     }
 
 }
+
